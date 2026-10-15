@@ -99,10 +99,10 @@ class CustomerController extends Controller
                 }),
             ],
             'phone' => ['required', 'regex:/^\d+$/'],
-            'street' => 'required',
-            'suburb' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+            'street' => 'nullable',
+            'suburb' => ['nullable', 'regex:/^[A-Za-z\s]+$/'],
             'state' => 'required',
-            'pincod' => ['required', 'regex:/^\d+$/'],
+            'pincod' => ['nullable', 'regex:/^\d+$/'],
         ], [
             'email.unique' => 'This email is already used under your admin account.',
             'phone.regex' => 'The phone number may contain digits only.',
@@ -110,7 +110,15 @@ class CustomerController extends Controller
             'pincod.regex' => 'The pincode may contain digits only.',
         ]);
 
-        $data = $request->only(['name', 'email', 'phone', 'street', 'house_number', 'suburb', 'state', 'pincod']);
+        $data = [
+            'name'   => $request->name,
+            'email'  => $request->email,
+            'phone'  => $request->phone,
+            'street' => $request->street ?? '',
+            'suburb' => $request->suburb ?? '',
+            'state'  => $request->state,
+            'pincod' => $request->pincod ?? '',
+        ];
         $data['admin_user_id'] = auth()->user()->id;
 
         Customer::create($data);
@@ -164,10 +172,10 @@ class CustomerController extends Controller
                 }),
             ],
             'phone' => 'required',
-            'street' => 'required',
-            'suburb' => ['required', 'regex:/^[A-Za-z\s]+$/'],
+            'street' => 'nullable',
+            'suburb' => ['nullable', 'regex:/^[A-Za-z\s]+$/'],
             'state' => 'required',
-            'pincod' => ['required', 'regex:/^\d+$/'],
+            'pincod' => ['nullable', 'regex:/^\d+$/'],
         ], [
             'phone.regex' => 'The phone number must be in international format, e.g., +1234567890.',
             'email.unique' => 'The email address has already been taken.',
@@ -175,7 +183,15 @@ class CustomerController extends Controller
             'pincod.regex' => 'The pincode may contain digits only.',
         ]);
 
-        $customer->update($request->only(['name', 'email', 'phone', 'street', 'house_number', 'suburb', 'state', 'pincod']));
+        $customer->update([
+            'name'         => $request->name,
+            'email'        => $request->email,
+            'phone'        => $request->phone,
+            'street'       => $request->street ?? '',
+            'suburb'       => $request->suburb ?? '',
+            'state'        => $request->state,
+            'pincod'       => $request->pincod ?? '',
+        ]);
 
         return redirect()->route('customers.edit', ['customer' => $customer->id])->with('success', 'Customer updated successfully.');
     }

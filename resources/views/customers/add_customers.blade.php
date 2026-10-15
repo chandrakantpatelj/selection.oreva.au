@@ -82,7 +82,7 @@
                                     </div> -->
                                     <div class="col-xs-12 col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="suburb" class="text-secondary mb-1">Suburb <span class="text-danger">*</span></label>
+                                            <label for="suburb" class="text-secondary mb-1">Suburb</label>
                                             <input type="text" id="suburb" name="suburb"
                                                 class="form-control border border-white-50">
                                             <span class="text-danger error-text suburb-error"></span>
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-12 mb-3">
                                         <div class="form-group">
-                                            <label for="street" class="text-secondary mb-1">Property Address <span class="text-danger">*</span></label>
+                                            <label for="street" class="text-secondary mb-1">Property Address</label>
                                             <input type="text" id="street" name="street"
                                                 class="form-control border border-white-50">
                                             <span class="text-danger error-text street-error"></span>
@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="pincod" class="text-secondary mb-1">Pincode <span class="text-danger">*</span></label>
+                                            <label for="pincod" class="text-secondary mb-1">Pincode</label>
                                             <input type="text" id="pincod" name="pincod"
                                                 class="form-control border border-white-50">
                                             <span class="text-danger error-text pincod-error"></span>
@@ -199,23 +199,19 @@
                             }
                         },
 
-                        street: {
-                            required: true,
-                        },
+                        street: {},
 
                         phone: {
                             required: true,
                             digits: true,
                         },
                         suburb: {
-                            required: true,
                             validSuburb: true,
                         },
                         state: {
                             required: true,
                         },
                         pincod: {
-                            required: true,
                             digits: true,
                         }
                     },
@@ -228,22 +224,18 @@
                             required: "Please enter your email address",
                             remote: "The email address has already been taken"
                         },
-                        street: {
-                            required: "Please enter your Address/Location"
-                        },
+                        street: {},
 
                         phone: {
                             required: "Please enter your phone number",
                             digits: "Please enter only numbers for the phone number"
                         },
-                        suburb: {
-                            required: "Please enter your suburb"
-                        },
+                        suburb: {},
                         state: {
                             required: "Please enter your state"
                         },
                         pincod: {
-                            required: "Please enter your pincod"
+                            digits: "Please enter only numbers for the pincode"
                         }
                     },
 
