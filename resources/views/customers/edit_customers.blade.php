@@ -93,7 +93,7 @@
                             </div> -->
                                     <div class="col-xs-12 col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <p class="text-secondary mb-1">Suburb <span class="text-danger">*</span></p>
+                                            <p class="text-secondary mb-1">Suburb</p>
                                             <input type="text" name="suburb"
                                                 value="{{ old('suburb', $customer->suburb) }}"
                                                 class="form-control border border-white-50" placeholder="Suburb">
@@ -102,7 +102,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-12 mb-3">
                                         <div class="form-group">
-                                            <p class="text-secondary mb-1">Property Address <span class="text-danger">*</span></p>
+                                            <p class="text-secondary mb-1">Property Address</p>
                                             <input type="text" name="street"
                                                 value="{{ old('street', $customer->street) }}"
                                                 class="form-control border border-white-50" placeholder="Street">
@@ -145,7 +145,7 @@
 
                                     <div class="col-xs-12 col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <p class="text-secondary mb-1">Pincode <span class="text-danger">*</span></p>
+                                            <p class="text-secondary mb-1">Pincode</p>
                                             <input type="text" name="pincod"
                                                 value="{{ old('pincod', $customer->pincod) }}"
                                                 class="form-control border border-white-50" placeholder="Pincode">
@@ -212,19 +212,15 @@
                             required: true,
                             digits: true,
                         },
-                        street: {
-                            required: true
-                        },
+                        street: {},
 
                         suburb: {
-                            required: true,
                             validSuburb: true
                         },
                         state: {
                             required: true
                         },
                         pincod: {
-                            required: true,
                             digits: true,
                         }
                     },
@@ -240,18 +236,13 @@
                             required: "Please enter your phone number",
                             digits: "Please enter only numbers for the phone number"
                         },
-                        street: {
-                            required: "Please enter your street address"
-                        },
+                        street: {},
 
-                        suburb: {
-                            required: "Please enter your suburb"
-                        },
+                        suburb: {},
                         state: {
                             required: "Please enter your state"
                         },
                         pincod: {
-                            required: "Please enter your pincode",
                             digits: "Please enter only numbers for the pincode"
                         }
                     },
