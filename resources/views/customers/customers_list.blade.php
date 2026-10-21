@@ -38,6 +38,7 @@
                                             <th>ID</th>
                                             <th>Customer Name</th>
                                             <th>Email</th>
+                                            <th>Phone</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -124,6 +125,10 @@
                             {
                                 data: 'email',
                                 name: 'email'
+                            },
+                            {
+                                data: 'phone',
+                                name: 'phone'
                             },
                             {
                                 data: 'action',

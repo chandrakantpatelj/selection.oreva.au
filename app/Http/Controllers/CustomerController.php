@@ -36,7 +36,7 @@ class CustomerController extends Controller
         if (request()->ajax()) {
             $admin_user_id = auth()->user()->id;
 
-            $data = Customer::where('admin_user_id', $admin_user_id)->orderBy('created_at', 'desc')->select(['id', 'name', 'email']); 
+            $data = Customer::where('admin_user_id', $admin_user_id)->orderBy('created_at', 'desc')->select(['id', 'name', 'email', 'phone']); 
 
             return DataTables::of($data)
                 ->addIndexColumn()
