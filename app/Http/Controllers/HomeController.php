@@ -174,9 +174,9 @@ class HomeController extends Controller
                     . '<i class="ti ti-eye me-1"></i> View'
                     . '</a>'
                     . '<div class="dropdown-divider"></div>'
-                    . '<form action="' . $deleteUrl . '" method="POST" onsubmit="return confirm(\'Are you sure?\')">'
+                    . '<form action="' . $deleteUrl . '" method="POST" style="display:inline;">'
                     . $csrf . $methodDelete
-                    . '<button type="submit" class="text-danger dropdown-item">'
+                    . '<button type="button" class="text-danger dropdown-item delete-btn" data-customer-id="' . $row->id . '">'
                     . '<i class="ti ti-trash me-1"></i> Delete'
                     . '</button>'
                     . '</form>'

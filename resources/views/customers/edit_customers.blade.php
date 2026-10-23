@@ -180,12 +180,12 @@
                     return this.optional(element) || /^[A-Za-z\s]+$/.test(value);
                 }, "Suburb should contain only letters and spaces.");
 
-                $.validator.addMethod("validName", function(value, element) {
-                    return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
-                }, "Name should contain only letters and spaces.");
+                $.validator.addMethod("validPhone", function(value, element) {
+                    return this.optional(element) || /^\d+$/.test(value.replace(/\s/g, ''));
+                }, "Please enter only numbers for the phone number");
 
                 $('input[name="phone"]').on('input', function() {
-                    this.value = this.value.replace(/[^0-9]/g, '');
+                    this.value = this.value.replace(/[^0-9\s]/g, '');
                 });
 
                 $('input[name="suburb"]').on('input', function() {
@@ -201,7 +201,6 @@
                     rules: {
                         name: {
                             required: true,
-                            validName: true,
                         },
                         email: {
                             required: true,
@@ -210,7 +209,7 @@
                         },
                         phone: {
                             required: true,
-                            digits: true,
+                            validPhone: true,
                         },
                         street: {},
 
@@ -234,7 +233,7 @@
                         },
                         phone: {
                             required: "Please enter your phone number",
-                            digits: "Please enter only numbers for the phone number"
+                            validPhone: "Please enter only numbers for the phone number"
                         },
                         street: {},
 

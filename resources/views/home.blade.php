@@ -172,6 +172,25 @@
         </div>
     </div>
 
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this customer?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Add this in the <head> section of your layout or directly in the Blade view -->
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -209,6 +228,36 @@
                 order: [
                     [0, 'asc']
                 ]
+            });
+
+            // Delete button click — show confirmation modal
+            $(document).on('click', '.delete-btn', function() {
+                var form = $(this).closest('form');
+                $('#confirmDeleteBtn').data('form', form);
+                $('#deleteModal').modal('show');
+            });
+
+            // Confirm delete — send via AJAX so JSON response is handled properly
+            $('#confirmDeleteBtn').on('click', function() {
+                var form = $(this).data('form');
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'POST',
+                    data: form.serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            $('#deleteModal').modal('hide');
+                            table.ajax.reload(null, false);
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Error deleting customer.');
+                    }
+                });
             });
 
             // Chart.js setup
