@@ -1165,6 +1165,7 @@ class ListController extends Controller
         $ordersData = Order::select(
             'orders.*',
             'products.product_name',
+            'products.product_code',
             'products.product_image',
             'products.specification_product_image'
         )
@@ -1173,10 +1174,22 @@ class ListController extends Controller
         ->where('orders.customer_id', $customer_id)
         ->get();
 
+        $latestPosNameOrder = $ordersData
+            ->filter(fn ($order) => !empty($order->pos_customer_name))
+            ->sortByDesc('updated_at')
+            ->first();
+
+        $latestPosSignatureOrder = $ordersData
+            ->filter(fn ($order) => !empty($order->pos_customer_signature))
+            ->sortByDesc('updated_at')
+            ->first();
+
         $orderData = [
             'list' => $list,
             'customer' => $customer,
-            'ordersData' => $ordersData
+            'ordersData' => $ordersData,
+            'posCustomerName' => $latestPosNameOrder ? $latestPosNameOrder->pos_customer_name : null,
+            'posCustomerSignature' => $latestPosSignatureOrder ? $latestPosSignatureOrder->pos_customer_signature : null,
         ];
 
         $pdf = Pdf::loadView('emails.order_confirmation', ['orderData' => $orderData, 'isPdf' => true]);
